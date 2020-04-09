@@ -56,6 +56,13 @@ const actions = {
 
         const { roles, name, avatar, introduction } = data
 
+        // const roles = []
+        // for (let i = 0; i < authorities.length; i++) {
+        //   if (authorities[i].authority.startWith('ROLE')) {
+        //     roles.push(authorities[i].authority.substr(5, authorities[i].authority.length))
+        //   }
+        // }
+
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
@@ -63,7 +70,7 @@ const actions = {
 
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', process.env.VUE_APP_BASE_AVATAR + avatar)
         commit('SET_INTRODUCTION', introduction)
         resolve(data)
       }).catch(error => {

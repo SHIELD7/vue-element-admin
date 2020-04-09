@@ -84,6 +84,31 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/clip',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/clip/clip-list'),
+        name: '视频',
+        meta: { title: '视频', icon: 'list', affix: true }
+      }
+    ]
+  },
+
+  {
+    path: '/user',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/user/user-list'),
+        name: '用户',
+        meta: { title: '用户', icon: 'list', affix: true }
+      }
+    ]
+  },
+  {
     path: '/documentation',
     component: Layout,
     children: [

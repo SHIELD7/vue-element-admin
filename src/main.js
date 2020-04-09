@@ -27,10 +27,11 @@ import * as filters from './filters' // global filters
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
+// eslint-disable-next-line no-empty
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
 }
+const hls = require('videojs-contrib-hls')
+Vue.use(hls)
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size

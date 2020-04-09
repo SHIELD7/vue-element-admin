@@ -4,7 +4,7 @@
       <span>About me</span>
     </div>
 
-    <div class="user-profile">
+    <div class="user-profile" @click="imagecropperShow=true">
       <div class="box-center">
         <pan-thumb :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
           <div>Hello</div>
@@ -49,14 +49,27 @@
         </div>
       </div>
     </div>
+    <image-cropper
+      v-show="imagecropperShow"
+      :key="imagecropperKey"
+      :width="300"
+      :height="300"
+      :headers="header"
+      :url="uploadUrl"
+      lang-type="zh"
+      @close="close"
+      @crop-upload-success="cropSuccess"
+    />
   </el-card>
 </template>
 
 <script>
 import PanThumb from '@/components/PanThumb'
+import ImageCropper from '@/components/ImageCropper/index'
+import { getToken } from '@/utils/auth'
 
 export default {
-  components: { PanThumb },
+  components: { PanThumb, ImageCropper },
   props: {
     user: {
       type: Object,
@@ -68,6 +81,22 @@ export default {
           role: ''
         }
       }
+    }
+  },
+  data() {
+    return {
+      imagecropperShow: false,
+      imagecropperKey: 0,
+      header: { 'Authorization': getToken() },
+      uploadUrl: process.env.VUE_APP_BASE_API + '/api/user/avatar'
+    }
+  },
+  methods: {
+    cropSuccess(resData) {
+      location.reload()
+    },
+    close() {
+      this.imagecropperShow = false
     }
   }
 }
