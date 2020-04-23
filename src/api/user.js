@@ -8,7 +8,7 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
+export function getInfo() {
   return request({
     url: '/api/user/info',
     method: 'get'
@@ -23,10 +23,26 @@ export function logout() {
   })
 }
 
-export function fetchUserList(query) {
+export function fetchUserList(data) {
   return request({
     url: '/api/user/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data
+  })
+}
+
+export function lockUser(data) {
+  return request({
+    url: '/api/user/lock',
+    method: 'post',
+    data
+  })
+}
+
+export function unlockUser(data) {
+  return request({
+    url: '/api/user/unlock',
+    method: 'post',
+    data
   })
 }
